@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SkjobMapper">
+  <resultMap id="BaseResultMap" type="com.bean.Skjob">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="limit" jdbcType="INTEGER" property="limit" />
+    <result column="deptno" jdbcType="INTEGER" property="deptno" />
+    <result column="explanation1" jdbcType="VARCHAR" property="explanation1" />
+    <result column="explanation2" jdbcType="VARCHAR" property="explanation2" />
+    <result column="explanation3" jdbcType="VARCHAR" property="explanation3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, type, limit, deptno, explanation1, explanation2, explanation3
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.SkjobExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from skjob
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from skjob
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from skjob
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.SkjobExample">
+    delete from skjob
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.Skjob">
+    insert into skjob (id, name, type, 
+      limit, deptno, explanation1, 
+      explanation2, explanation3)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{limit,jdbcType=INTEGER}, #{deptno,jdbcType=INTEGER}, #{explanation1,jdbcType=VARCHAR}, 
+      #{explanation2,jdbcType=VARCHAR}, #{explanation3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.Skjob">
+    insert into skjob
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="limit != null">
+        limit,
+      </if>
+      <if test="deptno != null">
+        deptno,
+      </if>
+      <if test="explanation1 != null">
+        explanation1,
+      </if>
+      <if test="explanation2 != null">
+        explanation2,
+      </if>
+      <if test="explanation3 != null">
+        explanation3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="limit != null">
+        #{limit,jdbcType=INTEGER},
+      </if>
+      <if test="deptno != null">
+        #{deptno,jdbcType=INTEGER},
+      </if>
+      <if test="explanation1 != null">
+        #{explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation2 != null">
+        #{explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation3 != null">
+        #{explanation3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.SkjobExample" resultType="java.lang.Long">
+    select count(*) from skjob
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update skjob
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limit != null">
+        limit = #{record.limit,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptno != null">
+        deptno = #{record.deptno,jdbcType=INTEGER},
+      </if>
+      <if test="record.explanation1 != null">
+        explanation1 = #{record.explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation2 != null">
+        explanation2 = #{record.explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation3 != null">
+        explanation3 = #{record.explanation3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update skjob
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      limit = #{record.limit,jdbcType=INTEGER},
+      deptno = #{record.deptno,jdbcType=INTEGER},
+      explanation1 = #{record.explanation1,jdbcType=VARCHAR},
+      explanation2 = #{record.explanation2,jdbcType=VARCHAR},
+      explanation3 = #{record.explanation3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.Skjob">
+    update skjob
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="limit != null">
+        limit = #{limit,jdbcType=INTEGER},
+      </if>
+      <if test="deptno != null">
+        deptno = #{deptno,jdbcType=INTEGER},
+      </if>
+      <if test="explanation1 != null">
+        explanation1 = #{explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation2 != null">
+        explanation2 = #{explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation3 != null">
+        explanation3 = #{explanation3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.Skjob">
+    update skjob
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      limit = #{limit,jdbcType=INTEGER},
+      deptno = #{deptno,jdbcType=INTEGER},
+      explanation1 = #{explanation1,jdbcType=VARCHAR},
+      explanation2 = #{explanation2,jdbcType=VARCHAR},
+      explanation3 = #{explanation3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

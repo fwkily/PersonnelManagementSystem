@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OccupationcareerMapper">
+  <resultMap id="BaseResultMap" type="com.bean.Occupationcareer">
+    <id column="empno" jdbcType="INTEGER" property="empno" />
+    <result column="begintime" jdbcType="DATE" property="begintime" />
+    <result column="endtime" jdbcType="DATE" property="endtime" />
+    <result column="jobname" jdbcType="VARCHAR" property="jobname" />
+    <result column="jobdiscrip" jdbcType="VARCHAR" property="jobdiscrip" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="salary" jdbcType="INTEGER" property="salary" />
+    <result column="reference" jdbcType="VARCHAR" property="reference" />
+    <result column="referenceposition" jdbcType="VARCHAR" property="referenceposition" />
+    <result column="referencetel" jdbcType="VARCHAR" property="referencetel" />
+    <result column="explanation1" jdbcType="VARCHAR" property="explanation1" />
+    <result column="explanation2" jdbcType="VARCHAR" property="explanation2" />
+    <result column="explanation3" jdbcType="VARCHAR" property="explanation3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    empno, begintime, endtime, jobname, jobdiscrip, position, salary, reference, referenceposition, 
+    referencetel, explanation1, explanation2, explanation3
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.OccupationcareerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from occupationcareer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from occupationcareer
+    where empno = #{empno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from occupationcareer
+    where empno = #{empno,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.OccupationcareerExample">
+    delete from occupationcareer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.Occupationcareer">
+    insert into occupationcareer (empno, begintime, endtime, 
+      jobname, jobdiscrip, position, 
+      salary, reference, referenceposition, 
+      referencetel, explanation1, explanation2, 
+      explanation3)
+    values (#{empno,jdbcType=INTEGER}, #{begintime,jdbcType=DATE}, #{endtime,jdbcType=DATE}, 
+      #{jobname,jdbcType=VARCHAR}, #{jobdiscrip,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=INTEGER}, #{reference,jdbcType=VARCHAR}, #{referenceposition,jdbcType=VARCHAR}, 
+      #{referencetel,jdbcType=VARCHAR}, #{explanation1,jdbcType=VARCHAR}, #{explanation2,jdbcType=VARCHAR}, 
+      #{explanation3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.Occupationcareer">
+    insert into occupationcareer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empno != null">
+        empno,
+      </if>
+      <if test="begintime != null">
+        begintime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="jobname != null">
+        jobname,
+      </if>
+      <if test="jobdiscrip != null">
+        jobdiscrip,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="reference != null">
+        reference,
+      </if>
+      <if test="referenceposition != null">
+        referenceposition,
+      </if>
+      <if test="referencetel != null">
+        referencetel,
+      </if>
+      <if test="explanation1 != null">
+        explanation1,
+      </if>
+      <if test="explanation2 != null">
+        explanation2,
+      </if>
+      <if test="explanation3 != null">
+        explanation3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empno != null">
+        #{empno,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null">
+        #{begintime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=DATE},
+      </if>
+      <if test="jobname != null">
+        #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobdiscrip != null">
+        #{jobdiscrip,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="reference != null">
+        #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceposition != null">
+        #{referenceposition,jdbcType=VARCHAR},
+      </if>
+      <if test="referencetel != null">
+        #{referencetel,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation1 != null">
+        #{explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation2 != null">
+        #{explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation3 != null">
+        #{explanation3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.OccupationcareerExample" resultType="java.lang.Long">
+    select count(*) from occupationcareer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update occupationcareer
+    <set>
+      <if test="record.empno != null">
+        empno = #{record.empno,jdbcType=INTEGER},
+      </if>
+      <if test="record.begintime != null">
+        begintime = #{record.begintime,jdbcType=DATE},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=DATE},
+      </if>
+      <if test="record.jobname != null">
+        jobname = #{record.jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobdiscrip != null">
+        jobdiscrip = #{record.jobdiscrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null">
+        salary = #{record.salary,jdbcType=INTEGER},
+      </if>
+      <if test="record.reference != null">
+        reference = #{record.reference,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referenceposition != null">
+        referenceposition = #{record.referenceposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referencetel != null">
+        referencetel = #{record.referencetel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation1 != null">
+        explanation1 = #{record.explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation2 != null">
+        explanation2 = #{record.explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation3 != null">
+        explanation3 = #{record.explanation3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update occupationcareer
+    set empno = #{record.empno,jdbcType=INTEGER},
+      begintime = #{record.begintime,jdbcType=DATE},
+      endtime = #{record.endtime,jdbcType=DATE},
+      jobname = #{record.jobname,jdbcType=VARCHAR},
+      jobdiscrip = #{record.jobdiscrip,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=INTEGER},
+      reference = #{record.reference,jdbcType=VARCHAR},
+      referenceposition = #{record.referenceposition,jdbcType=VARCHAR},
+      referencetel = #{record.referencetel,jdbcType=VARCHAR},
+      explanation1 = #{record.explanation1,jdbcType=VARCHAR},
+      explanation2 = #{record.explanation2,jdbcType=VARCHAR},
+      explanation3 = #{record.explanation3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.Occupationcareer">
+    update occupationcareer
+    <set>
+      <if test="begintime != null">
+        begintime = #{begintime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="jobname != null">
+        jobname = #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobdiscrip != null">
+        jobdiscrip = #{jobdiscrip,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="reference != null">
+        reference = #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceposition != null">
+        referenceposition = #{referenceposition,jdbcType=VARCHAR},
+      </if>
+      <if test="referencetel != null">
+        referencetel = #{referencetel,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation1 != null">
+        explanation1 = #{explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation2 != null">
+        explanation2 = #{explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation3 != null">
+        explanation3 = #{explanation3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where empno = #{empno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.Occupationcareer">
+    update occupationcareer
+    set begintime = #{begintime,jdbcType=DATE},
+      endtime = #{endtime,jdbcType=DATE},
+      jobname = #{jobname,jdbcType=VARCHAR},
+      jobdiscrip = #{jobdiscrip,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      reference = #{reference,jdbcType=VARCHAR},
+      referenceposition = #{referenceposition,jdbcType=VARCHAR},
+      referencetel = #{referencetel,jdbcType=VARCHAR},
+      explanation1 = #{explanation1,jdbcType=VARCHAR},
+      explanation2 = #{explanation2,jdbcType=VARCHAR},
+      explanation3 = #{explanation3,jdbcType=VARCHAR}
+    where empno = #{empno,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SkempMapper">
+  <resultMap id="BaseResultMap" type="com.bean.Skemp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="bir" jdbcType="DATE" property="bir" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="toworktime" jdbcType="DATE" property="toworktime" />
+    <result column="zzmm" jdbcType="VARCHAR" property="zzmm" />
+    <result column="national" jdbcType="VARCHAR" property="national" />
+    <result column="natives" jdbcType="VARCHAR" property="natives" />
+    <result column="tele" jdbcType="VARCHAR" property="tele" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="bloodtype" jdbcType="VARCHAR" property="bloodtype" />
+    <result column="birthplace" jdbcType="VARCHAR" property="birthplace" />
+    <result column="hkplace" jdbcType="VARCHAR" property="hkplace" />
+    <result column="xl" jdbcType="VARCHAR" property="xl" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="graduateschool" jdbcType="VARCHAR" property="graduateschool" />
+    <result column="professional" jdbcType="VARCHAR" property="professional" />
+    <result column="graduatetime" jdbcType="DATE" property="graduatetime" />
+    <result column="explanation1" jdbcType="VARCHAR" property="explanation1" />
+    <result column="explanation2" jdbcType="VARCHAR" property="explanation2" />
+    <result column="explanation3" jdbcType="VARCHAR" property="explanation3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, sex, bir, idcard, toworktime, zzmm, national, natives, tele, mail, height, 
+    bloodtype, birthplace, hkplace, xl, degree, graduateschool, professional, graduatetime, 
+    explanation1, explanation2, explanation3
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.SkempExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from skemp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from skemp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from skemp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.SkempExample">
+    delete from skemp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.Skemp">
+    insert into skemp (id, name, sex, 
+      bir, idcard, toworktime, 
+      zzmm, national, natives, 
+      tele, mail, height, 
+      bloodtype, birthplace, hkplace, 
+      xl, degree, graduateschool, 
+      professional, graduatetime, explanation1, 
+      explanation2, explanation3)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{bir,jdbcType=DATE}, #{idcard,jdbcType=VARCHAR}, #{toworktime,jdbcType=DATE}, 
+      #{zzmm,jdbcType=VARCHAR}, #{national,jdbcType=VARCHAR}, #{natives,jdbcType=VARCHAR}, 
+      #{tele,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
+      #{bloodtype,jdbcType=VARCHAR}, #{birthplace,jdbcType=VARCHAR}, #{hkplace,jdbcType=VARCHAR}, 
+      #{xl,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{graduateschool,jdbcType=VARCHAR}, 
+      #{professional,jdbcType=VARCHAR}, #{graduatetime,jdbcType=DATE}, #{explanation1,jdbcType=VARCHAR}, 
+      #{explanation2,jdbcType=VARCHAR}, #{explanation3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.Skemp">
+    insert into skemp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="bir != null">
+        bir,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="toworktime != null">
+        toworktime,
+      </if>
+      <if test="zzmm != null">
+        zzmm,
+      </if>
+      <if test="national != null">
+        national,
+      </if>
+      <if test="natives != null">
+        natives,
+      </if>
+      <if test="tele != null">
+        tele,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="bloodtype != null">
+        bloodtype,
+      </if>
+      <if test="birthplace != null">
+        birthplace,
+      </if>
+      <if test="hkplace != null">
+        hkplace,
+      </if>
+      <if test="xl != null">
+        xl,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="graduateschool != null">
+        graduateschool,
+      </if>
+      <if test="professional != null">
+        professional,
+      </if>
+      <if test="graduatetime != null">
+        graduatetime,
+      </if>
+      <if test="explanation1 != null">
+        explanation1,
+      </if>
+      <if test="explanation2 != null">
+        explanation2,
+      </if>
+      <if test="explanation3 != null">
+        explanation3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="bir != null">
+        #{bir,jdbcType=DATE},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="toworktime != null">
+        #{toworktime,jdbcType=DATE},
+      </if>
+      <if test="zzmm != null">
+        #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="national != null">
+        #{national,jdbcType=VARCHAR},
+      </if>
+      <if test="natives != null">
+        #{natives,jdbcType=VARCHAR},
+      </if>
+      <if test="tele != null">
+        #{tele,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtype != null">
+        #{bloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="birthplace != null">
+        #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="hkplace != null">
+        #{hkplace,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null">
+        #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateschool != null">
+        #{graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatetime != null">
+        #{graduatetime,jdbcType=DATE},
+      </if>
+      <if test="explanation1 != null">
+        #{explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation2 != null">
+        #{explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation3 != null">
+        #{explanation3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.SkempExample" resultType="java.lang.Long">
+    select count(*) from skemp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update skemp
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bir != null">
+        bir = #{record.bir,jdbcType=DATE},
+      </if>
+      <if test="record.idcard != null">
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toworktime != null">
+        toworktime = #{record.toworktime,jdbcType=DATE},
+      </if>
+      <if test="record.zzmm != null">
+        zzmm = #{record.zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.national != null">
+        national = #{record.national,jdbcType=VARCHAR},
+      </if>
+      <if test="record.natives != null">
+        natives = #{record.natives,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tele != null">
+        tele = #{record.tele,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null">
+        mail = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodtype != null">
+        bloodtype = #{record.bloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthplace != null">
+        birthplace = #{record.birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hkplace != null">
+        hkplace = #{record.hkplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xl != null">
+        xl = #{record.xl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null">
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateschool != null">
+        graduateschool = #{record.graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professional != null">
+        professional = #{record.professional,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduatetime != null">
+        graduatetime = #{record.graduatetime,jdbcType=DATE},
+      </if>
+      <if test="record.explanation1 != null">
+        explanation1 = #{record.explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation2 != null">
+        explanation2 = #{record.explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanation3 != null">
+        explanation3 = #{record.explanation3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update skemp
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      bir = #{record.bir,jdbcType=DATE},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      toworktime = #{record.toworktime,jdbcType=DATE},
+      zzmm = #{record.zzmm,jdbcType=VARCHAR},
+      national = #{record.national,jdbcType=VARCHAR},
+      natives = #{record.natives,jdbcType=VARCHAR},
+      tele = #{record.tele,jdbcType=VARCHAR},
+      mail = #{record.mail,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=VARCHAR},
+      bloodtype = #{record.bloodtype,jdbcType=VARCHAR},
+      birthplace = #{record.birthplace,jdbcType=VARCHAR},
+      hkplace = #{record.hkplace,jdbcType=VARCHAR},
+      xl = #{record.xl,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      graduateschool = #{record.graduateschool,jdbcType=VARCHAR},
+      professional = #{record.professional,jdbcType=VARCHAR},
+      graduatetime = #{record.graduatetime,jdbcType=DATE},
+      explanation1 = #{record.explanation1,jdbcType=VARCHAR},
+      explanation2 = #{record.explanation2,jdbcType=VARCHAR},
+      explanation3 = #{record.explanation3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.Skemp">
+    update skemp
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="bir != null">
+        bir = #{bir,jdbcType=DATE},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="toworktime != null">
+        toworktime = #{toworktime,jdbcType=DATE},
+      </if>
+      <if test="zzmm != null">
+        zzmm = #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="national != null">
+        national = #{national,jdbcType=VARCHAR},
+      </if>
+      <if test="natives != null">
+        natives = #{natives,jdbcType=VARCHAR},
+      </if>
+      <if test="tele != null">
+        tele = #{tele,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtype != null">
+        bloodtype = #{bloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="birthplace != null">
+        birthplace = #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="hkplace != null">
+        hkplace = #{hkplace,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null">
+        xl = #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateschool != null">
+        graduateschool = #{graduateschool,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        professional = #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatetime != null">
+        graduatetime = #{graduatetime,jdbcType=DATE},
+      </if>
+      <if test="explanation1 != null">
+        explanation1 = #{explanation1,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation2 != null">
+        explanation2 = #{explanation2,jdbcType=VARCHAR},
+      </if>
+      <if test="explanation3 != null">
+        explanation3 = #{explanation3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.Skemp">
+    update skemp
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      bir = #{bir,jdbcType=DATE},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      toworktime = #{toworktime,jdbcType=DATE},
+      zzmm = #{zzmm,jdbcType=VARCHAR},
+      national = #{national,jdbcType=VARCHAR},
+      natives = #{natives,jdbcType=VARCHAR},
+      tele = #{tele,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      bloodtype = #{bloodtype,jdbcType=VARCHAR},
+      birthplace = #{birthplace,jdbcType=VARCHAR},
+      hkplace = #{hkplace,jdbcType=VARCHAR},
+      xl = #{xl,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      graduateschool = #{graduateschool,jdbcType=VARCHAR},
+      professional = #{professional,jdbcType=VARCHAR},
+      graduatetime = #{graduatetime,jdbcType=DATE},
+      explanation1 = #{explanation1,jdbcType=VARCHAR},
+      explanation2 = #{explanation2,jdbcType=VARCHAR},
+      explanation3 = #{explanation3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
